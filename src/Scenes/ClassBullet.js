@@ -86,7 +86,7 @@ class ClassBullet extends Phaser.Scene {
         my.sprite.elephant.update();
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {
-            this.scene.start("singleBullet");
+            this.scene.start("arrayBoom");
         }
 
     }

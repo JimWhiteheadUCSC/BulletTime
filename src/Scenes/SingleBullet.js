@@ -19,9 +19,10 @@ class SingleBullet extends Phaser.Scene {
 
     create() {
         let my = this.my;
-
+        
         my.sprite.elephant = this.add.sprite(game.config.width/2, game.config.height - 40, "elephant");
         my.sprite.elephant.setScale(0.25);
+
         // Create the "bullet" offscreen and make it invisible to start
         my.sprite.heart = this.add.sprite(-10, -10, "heart");
         my.sprite.heart.visible = false;
@@ -58,8 +59,8 @@ class SingleBullet extends Phaser.Scene {
                 my.sprite.elephant.x += this.playerSpeed;
             }
         }
-
-        // Check for bullet being fired
+        
+            // Check for bullet being fired
         if (Phaser.Input.Keyboard.JustDown(this.space)) {
             // Only start the bullet if it's not currently active
             if (!this.bulletActive) {
@@ -84,6 +85,7 @@ class SingleBullet extends Phaser.Scene {
                 my.sprite.heart.visible = false;
             }
         }
+
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {
             this.scene.start("arrayBullet");
