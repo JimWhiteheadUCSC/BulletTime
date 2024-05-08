@@ -22,8 +22,8 @@ class ArrayBoom extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
         this.load.image("elephant", "elephant.png");
-        this.load.image("heart", "heart.png");
-        this.load.image("hippo", "hippo.png");
+        this.load.image("heart", "laserRed12.png");
+        this.load.image("hippo", "shipBlue_manned.png");
 
         // For animation
         this.load.image("whitePuff00", "whitePuff00.png");
@@ -50,7 +50,7 @@ class ArrayBoom extends Phaser.Scene {
         my.sprite.elephant.setScale(0.25);
 
         my.sprite.hippo = this.add.sprite(game.config.width/2, 80, "hippo");
-        my.sprite.hippo.setScale(0.25);
+        my.sprite.hippo.setScale(0.5);
         my.sprite.hippo.scorePoints = 25;
 
         // Notice that in this approach, we don't create any bullet sprites in create(),

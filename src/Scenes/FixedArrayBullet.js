@@ -20,7 +20,7 @@ class FixedArrayBullet extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
         this.load.image("elephant", "elephant.png");
-        this.load.image("heart", "heart.png");
+        this.load.image("heart", "laserRed12.png");
     }
 
     create() {
