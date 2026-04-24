@@ -36,23 +36,24 @@ class ArrayBullet extends Phaser.Scene {
         this.nextScene = this.input.keyboard.addKey("S");
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        // Set movement speeds (in pixels/tick)
-        this.playerSpeed = 5;
-        this.bulletSpeed = 5;
+        // Set movement speeds (in pixels/sec)
+        this.playerSpeed = 300;
+        this.bulletSpeed = 300;
 
         // update HTML description
         document.getElementById('description').innerHTML = '<h2>Array Bullet.js</h2><br>A: left // D: right // Space: fire/emit // S: Next Scene'
 
     }
 
-    update() {
+    update(time, delta) {
         let my = this.my;
+        let dt = delta / 1000;
 
         // Moving left
         if (this.left.isDown) {
             // Check to make sure the sprite can actually move left
             if (my.sprite.elephant.x > (my.sprite.elephant.displayWidth/2)) {
-                my.sprite.elephant.x -= this.playerSpeed;
+                my.sprite.elephant.x -= this.playerSpeed * dt;
             }
         }
 
@@ -60,7 +61,7 @@ class ArrayBullet extends Phaser.Scene {
         if (this.right.isDown) {
             // Check to make sure the sprite can actually move right
             if (my.sprite.elephant.x < (game.config.width - (my.sprite.elephant.displayWidth/2))) {
-                my.sprite.elephant.x += this.playerSpeed;
+                my.sprite.elephant.x += this.playerSpeed * dt;
             }
         }
 
@@ -76,7 +77,7 @@ class ArrayBullet extends Phaser.Scene {
 
         // Make all of the bullets move
         for (let bullet of my.sprite.bullet) {
-            bullet.y -= this.bulletSpeed;
+            bullet.y -= this.bulletSpeed * dt;
         }
 
         // Remove all of the bullets which are offscreen
@@ -88,7 +89,7 @@ class ArrayBullet extends Phaser.Scene {
         // We store the array returned from filter() back into the bullet
         // array, overwriting it. 
         // This does have the impact of re-creating the bullet array on every 
-        // update() call. 
+        // update() call (not great, leads to more garbage collection over time). 
         my.sprite.bullet = my.sprite.bullet.filter((bullet) => bullet.y > -(bullet.displayHeight/2));
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {

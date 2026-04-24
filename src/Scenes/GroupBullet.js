@@ -49,24 +49,26 @@ class GroupBullet extends Phaser.Scene {
         this.nextScene = this.input.keyboard.addKey("S");
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        // Set movement speeds (in pixels/tick)
-        this.playerSpeed = 5;
-        this.bulletSpeed = 5;
+        // Set movement speeds (in pixels/sec)
+        this.playerSpeed = 300;
+        this.bulletSpeed = 300;
 
         // update HTML description
         document.getElementById('description').innerHTML = '<h2>Game Object Group Bullet.js</h2><br>A: left // D: right // Space: fire/emit // S: Next Scene'
 
     }
 
-    update() {
+    update(time, delta) {
         let my = this.my;
+        let dt = delta / 1000;
+
         this.bulletCooldownCounter--;
 
         // Moving left
         if (this.left.isDown) {
             // Check to make sure the sprite can actually move left
             if (my.sprite.elephant.x > (my.sprite.elephant.displayWidth/2)) {
-                my.sprite.elephant.x -= this.playerSpeed;
+                my.sprite.elephant.x -= this.playerSpeed * dt;
             }
         }
 
@@ -74,7 +76,7 @@ class GroupBullet extends Phaser.Scene {
         if (this.right.isDown) {
             // Check to make sure the sprite can actually move right
             if (my.sprite.elephant.x < (game.config.width - (my.sprite.elephant.displayWidth/2))) {
-                my.sprite.elephant.x += this.playerSpeed;
+                my.sprite.elephant.x += this.playerSpeed * dt;
             }
         }
 
@@ -103,7 +105,7 @@ class GroupBullet extends Phaser.Scene {
         }
 
         // move bullets
-        my.sprite.bulletGroup.incY(-this.bulletSpeed);
+        my.sprite.bulletGroup.incY(-this.bulletSpeed*dt);
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {
             this.scene.start("classBullet");

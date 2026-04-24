@@ -40,6 +40,8 @@ class ArrayBoom extends Phaser.Scene {
 
         // Sound asset from the Kenny Music Jingles pack
         // https://kenney.nl/assets/music-jingles
+        // Upon pain of 💀 do not use in your game projects. 
+        // (It's that bad)
         this.load.audio("dadada", "jingles_NES13.ogg");
     }
 
@@ -76,9 +78,9 @@ class ArrayBoom extends Phaser.Scene {
         this.nextScene = this.input.keyboard.addKey("S");
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        // Set movement speeds (in pixels/tick)
-        this.playerSpeed = 5;
-        this.bulletSpeed = 5;
+        // Set movement speeds (in pixels/sec)
+        this.playerSpeed = 300;
+        this.bulletSpeed = 300;
 
         // update HTML description
         document.getElementById('description').innerHTML = '<h2>Array Boom.js</h2><br>A: left // D: right // Space: fire/emit // S: Next Scene'
@@ -97,14 +99,15 @@ class ArrayBoom extends Phaser.Scene {
 
     }
 
-    update() {
+    update(time, delta) {
         let my = this.my;
+        let dt = delta / 1000;
 
         // Moving left
         if (this.left.isDown) {
             // Check to make sure the sprite can actually move left
             if (my.sprite.elephant.x > (my.sprite.elephant.displayWidth/2)) {
-                my.sprite.elephant.x -= this.playerSpeed;
+                my.sprite.elephant.x -= this.playerSpeed * dt;
             }
         }
 
@@ -112,7 +115,7 @@ class ArrayBoom extends Phaser.Scene {
         if (this.right.isDown) {
             // Check to make sure the sprite can actually move right
             if (my.sprite.elephant.x < (game.config.width - (my.sprite.elephant.displayWidth/2))) {
-                my.sprite.elephant.x += this.playerSpeed;
+                my.sprite.elephant.x += this.playerSpeed * dt;
             }
         }
 
@@ -165,11 +168,11 @@ class ArrayBoom extends Phaser.Scene {
 
         // Make all of the bullets move
         for (let bullet of my.sprite.bullet) {
-            bullet.y -= this.bulletSpeed;
+            bullet.y -= this.bulletSpeed * dt;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {
-            this.scene.start("fixedArrayBullet");
+            this.scene.start("singleBullet");
         }
 
     }

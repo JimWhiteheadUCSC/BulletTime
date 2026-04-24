@@ -33,22 +33,23 @@ class SingleBullet extends Phaser.Scene {
         this.nextScene = this.input.keyboard.addKey("S");
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        // Set movement speeds (in pixels/tick)
-        this.playerSpeed = 5;
-        this.bulletSpeed = 10;
+        // Set movement speeds (in pixels/sec)
+        this.playerSpeed = 300;
+        this.bulletSpeed = 600;
 
         // update HTML description
         document.getElementById('description').innerHTML = '<h2>Single Bullet.js</h2><br>A: left // D: right // Space: fire/emit // S: Next Scene'
     }
 
-    update() {
+    update(time, delta) {
         let my = this.my;
+        let dt = delta / 1000;
 
         // Moving left
         if (this.left.isDown) {
             // Check to make sure the sprite can actually move left
             if (my.sprite.elephant.x > (my.sprite.elephant.displayWidth/2)) {
-                my.sprite.elephant.x -= this.playerSpeed;
+                my.sprite.elephant.x -= this.playerSpeed * dt;
             }
         }
 
@@ -56,7 +57,7 @@ class SingleBullet extends Phaser.Scene {
         if (this.right.isDown) {
             // Check to make sure the sprite can actually move right
             if (my.sprite.elephant.x < (game.config.width - (my.sprite.elephant.displayWidth/2))) {
-                my.sprite.elephant.x += this.playerSpeed;
+                my.sprite.elephant.x += this.playerSpeed * dt;
             }
         }
         
@@ -77,7 +78,7 @@ class SingleBullet extends Phaser.Scene {
 
         // Now handle bullet movement, only if it is active
         if (this.bulletActive) {
-            my.sprite.heart.y -= this.bulletSpeed;
+            my.sprite.heart.y -= this.bulletSpeed * dt;
             // Is the bullet off the top of the screen?
             if (my.sprite.heart.y < -(my.sprite.heart.height/2)) {
                 // make it inactive and invisible

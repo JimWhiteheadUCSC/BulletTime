@@ -7,9 +7,9 @@ class ClassBullet extends Phaser.Scene {
         // This will be used to hold bindings (pointers) to created sprites.
         this.my = {sprite: {}};
 
-        // Set movement speeds (in pixels/tick)
-        this.playerSpeed = 5;
-        this.bulletSpeed = 5;
+        // Set movement speeds (in pixels/sec)
+        this.playerSpeed = 300;
+        this.bulletSpeed = 300;
 
         this.bulletCooldown = 3;        // Number of update() calls to wait before making a new bullet
         this.bulletCooldownCounter = 0;
@@ -32,7 +32,7 @@ class ClassBullet extends Phaser.Scene {
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         my.sprite.elephant = new Player(this, game.config.width/2, game.config.height - 40, "elephant", null,
-                                        this.left, this.right, 5);
+                                        this.left, this.right, this.playerSpeed);
         my.sprite.elephant.setScale(0.25);
 
         // In this approach, we create a single "group" game object which then holds up
@@ -63,7 +63,7 @@ class ClassBullet extends Phaser.Scene {
 
     }
 
-    update() {
+    update(time, delta) {
         let my = this.my;
         this.bulletCooldownCounter--;
 
@@ -83,7 +83,7 @@ class ClassBullet extends Phaser.Scene {
         }
 
         // update the player avatar by by calling the elephant's update()
-        my.sprite.elephant.update();
+        my.sprite.elephant.update(time, delta);
 
         if (Phaser.Input.Keyboard.JustDown(this.nextScene)) {
             this.scene.start("arrayBoom");
