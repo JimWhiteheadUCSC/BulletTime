@@ -303,7 +303,7 @@ class ArrayBoom extends Phaser.Scene {
                     h: bullet.displayHeight,
                 };
 
-                if(Collisionbox.overlaps(enemy.hitbox, bulletBox)){
+                if(CollisionBox.overlaps(enemy.hitbox, bulletBox)){
                     this.hitEnemy(enemy, bullet);
                 }
             }
@@ -320,7 +320,7 @@ class ArrayBoom extends Phaser.Scene {
                     h: bullet.displayHeight,
             };
 
-            if(Collisionbox.overlaps(my.sprite.playerShip.hitbox, bulletBox)){
+            if(CollisionBox.overlaps(my.sprite.playerShip.hitbox, bulletBox)){
                 if(bullet.bulletHitAnim){
                     console.log("ZOINKS");
                     this.explode = this.add.sprite(bullet.x, bullet.y, "bomb1").setScale(2.0).play(bullet.bulletHitAnim);
@@ -343,7 +343,7 @@ class ArrayBoom extends Phaser.Scene {
         if(!my.sprite.playerShip.hitbox) return;
         for (let enemy of this.enemies) {
             if(!enemy.active || !enemy.visible || !enemy.hitbox) continue;
-            if(Collisionbox.overlaps(enemy.hitbox, my.sprite.playerShip.hitbox)){
+            if(CollisionBox.overlaps(enemy.hitbox, my.sprite.playerShip.hitbox)){
                 
                 enemy.health = 0;
 

@@ -17,7 +17,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         scene.add.existing(this);
 
-        this.hitbox = new Collisionbox(scene, this, 20, 30, showHitboxes);
+        this.hitbox = new CollisionBox(scene, this, 20, 30, showHitboxes);
         return this;
     }
 
@@ -60,7 +60,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isActive = true;
         this.visible = true;
         if(this.hitbox) return;
-        this.hitbox = new Collisionbox(scene, this, 20, 30, showHitboxes);
+        this.hitbox = new CollisionBox(scene, this, 20, 30, showHitboxes);
     }
 
     destroy(fromScene){

@@ -14,7 +14,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
     initHitbox(width, height){
         let show = this.scene.showHitboxes || false;
-        this.hitbox = new Collisionbox(this.scene, this, width, height, show);
+        this.hitbox = new CollisionBox(this.scene, this, width, height, show);
     }
 
     updateHitbox(worldX, worldY){
@@ -278,7 +278,7 @@ class Bomber extends Enemy{
         bomb.makeInactive();
 
         this.scene.add.sprite(bx, by, "bomb1").setScale(this.bulletScale).play("explosion");
-        
+
 
         for(let i = 0; i < this.bulletSpreadCount; i++){
             let angle = aimAngle + (i / this.bulletSpreadCount) * Math.PI * 2.0;
