@@ -4,19 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bullet Time</title>
-    <script src="./lib/phaser.js"></script>
-    <script src="./src/Scenes/SingleBullet.js"></script>
-    <script src="./src/Scenes/ArrayBullet.js"></script>
-    <script src="./src/Scenes/FixedArrayBullet.js"></script>
-    <script src="./src/Scenes/GroupBullet.js"></script>
-    <script src="./src/Sprites/Player.js"></script>
-    <script src="./src/Sprites/Bullet.js"></script>
-    <script src="./src/Scenes/ClassBullet.js"></script>
-    <script src="./src/Scenes/ArrayBoom.js"></script>
-    <script src="./src/main.js"></script>
+    <style>
+        body{
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #phaser-game{
+            border: 4px solid #133ca4;
+            box-sizing: border-box;
+        }
+        #description{
+            width: 800px;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 8px;
+        }
+    </style>
 </head>
 <body>
-    <div id="phaser-game"></div>
-    <span id="description"></span>
+    <div id="container">
+        <div id="phaser-game"></div>
+        <span id="description"></span>
+    </div>
+    <script src="./lib/phaser.js"></script>
+    <script src="./src/Sprites/CollisionBox.js"></script>
+    <script src="./src/Sprites/Player.js"></script>
+    <script src="./src/Sprites/Bullet.js"></script>
+    <script src="./src/Sprites/Enemy.js"></script>
+    <script src="./src/Scenes/ArrayBoom.js"></script>
+    <script src="./src/Scenes/MainMenu.js"></script>
+    <script src="./src/Scenes/Scoreboard.js"></script>
+    <script src="./src/main.js"></script>
 </body>
 </html>
