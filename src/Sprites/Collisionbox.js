@@ -1,4 +1,4 @@
-class CollisionBox {
+class Collisionbox {
 
     constructor(scene, owner, width, height, debugShow = false){
         this.scene = scene;

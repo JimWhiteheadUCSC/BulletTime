@@ -14,7 +14,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
     initHitbox(width, height){
         let show = this.scene.showHitboxes || false;
-        this.hitbox = new CollisionBox(this.scene, this, width, height, show);
+        this.hitbox = new Collisionbox(this.scene, this, width, height, show);
     }
 
     updateHitbox(worldX, worldY){
